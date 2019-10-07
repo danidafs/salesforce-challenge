@@ -1,0 +1,23 @@
+.THIS .spinner-custom-class{
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+/*.THIS .slds-spinner__dot-a:after, 
+.THIS .slds-spinner__dot-a:before, 
+.THIS .slds-spinner__dot-b:after, 
+.THIS .slds-spinner__dot-b:before, 
+.THIS .slds-spinner:after, 
+.THIS .slds-spinner:before{
+	background: #FFCC33 !important;
+}*/
+
+.THIS .community:after, 
+.THIS .community:before{
+	background: #FFCC33 !important;
+}
+
+.THIS .internal:after, 
+.THIS .internal:before{
+	background: #6fa8dc !important;
+}

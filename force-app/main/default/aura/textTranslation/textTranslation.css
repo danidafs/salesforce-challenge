@@ -1,0 +1,29 @@
+.THIS.main-div {
+    background-color: #F0EEEF;
+    padding: 50px 200px 50px 200px;
+    border-radius: 4px;
+}
+
+.THIS .inside-block {
+    background-color:#FFFFFF;
+    padding: 50px;
+    border-radius: 4px;
+}
+
+.THIS .translate-request {
+    
+}
+
+.THIS .translate-result {
+    margin-top: 25px;
+}
+
+.THIS .datatable-footer {
+    margin-top: 20px;
+    display: flex;
+}
+
+.THIS .page-number {
+    text-align: right;
+    width: 100%;
+}

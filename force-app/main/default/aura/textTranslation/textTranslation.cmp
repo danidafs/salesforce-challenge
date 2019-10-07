@@ -1,0 +1,60 @@
+<aura:component controller="TextTranslationController" 
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="submitDisabled" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    
+    <aura:attribute name="textTranslate" type="String" />
+    <aura:attribute name="translateTo" type="String" />
+    
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="allTranslations" type="Object"/>
+    <aura:attribute name="mapTranslations" type="Object"/>
+    <aura:attribute name="pageTranslations" type="Object"/>
+    <aura:attribute name="currentPage" type="Integer" default="1"/>
+    <aura:attribute name="lastPage" type="Integer"/>
+    
+    <aura:attribute name="dataSize" type="Integer" default="0" />
+    
+    <!-- <div class="slds-box slds-theme_default"> -->
+    <div class="main-div">
+        
+        <div class="inside-block translate-request">
+            <lightning:recordEditForm objectApiName="Translation__c">
+                    <!-- the messages component is for error messages -->
+                    <lightning:messages />
+                    
+                    <lightning:inputField fieldName="Text__c" value="{!v.textTranslate}" onchange="{!c.checkSubmitAvailability}" />
+                    <lightning:inputField fieldName="TranslateTo__c" value="{!v.translateTo}" onchange="{!c.checkSubmitAvailability}" />
+                    <div class="slds-m-top_medium">
+                        <lightning:button variant="brand" name="submit" label="Submit" onclick="{!c.processSubmit}" disabled="{!v.submitDisabled}" />
+                    </div>
+                </lightning:recordEditForm>
+        </div>
+        
+        <aura:if isTrue="{!v.dataSize > 0}">
+            <div class="inside-block translate-result">
+                <lightning:datatable keyField="id" columns="{!v.columns}" data="{!v.pageTranslations}" hideCheckboxColumn="true"/>
+                
+                <div class="datatable-footer">
+                    <lightning:buttonGroup>
+                        <lightning:button label="Previous" title="Previous" onclick="{!c.previousPage}" disabled="{!v.currentPage == 1}" />
+                        <lightning:button label="Next" title="Previous" onclick="{!c.nextPage}" disabled="{!v.currentPage == v.lastPage}" />
+                    </lightning:buttonGroup>
+                    <div class="page-number">
+                        <ui:outputText value="{!'Page  ' + v.currentPage + ' of ' + v.lastPage}"/>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.showSpinner}">
+            <c:defaultSpinner colorMode="internal" />
+        </aura:if>
+        
+    </div>
+    
+    
+</aura:component>
