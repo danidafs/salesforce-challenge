@@ -18,20 +18,16 @@
     
     <aura:attribute name="dataSize" type="Integer" default="0" />
     
-    <!-- <div class="slds-box slds-theme_default"> -->
     <div class="main-div">
         
         <div class="inside-block translate-request">
             <lightning:recordEditForm objectApiName="Translation__c">
-                    <!-- the messages component is for error messages -->
-                    <lightning:messages />
-                    
-                    <lightning:inputField fieldName="Text__c" value="{!v.textTranslate}" onchange="{!c.checkSubmitAvailability}" />
-                    <lightning:inputField fieldName="TranslateTo__c" value="{!v.translateTo}" onchange="{!c.checkSubmitAvailability}" />
-                    <div class="slds-m-top_medium">
-                        <lightning:button variant="brand" name="submit" label="Submit" onclick="{!c.processSubmit}" disabled="{!v.submitDisabled}" />
-                    </div>
-                </lightning:recordEditForm>
+                <lightning:inputField fieldName="Text__c" value="{!v.textTranslate}" onchange="{!c.checkSubmitAvailability}" />
+                <lightning:inputField fieldName="TranslateTo__c" value="{!v.translateTo}" onchange="{!c.checkSubmitAvailability}" />
+                <div class="slds-m-top_medium">
+                    <lightning:button variant="brand" name="submit" label="Submit" onclick="{!c.processSubmit}" disabled="{!v.submitDisabled}" />
+                </div>
+            </lightning:recordEditForm>
         </div>
         
         <aura:if isTrue="{!v.dataSize > 0}">

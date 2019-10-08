@@ -8,11 +8,15 @@
             {label: 'Status', fieldName: 'Status__c', type: 'text'}
         ]);
         
+        // fetch translations for the first time
         helper.fetchTranslations(component);
+        
+        // start refreshing page in loop
         helper.loopRefresh(component, helper);
     },
     
     checkSubmitAvailability : function(component, event, helper) {
+        // checks if submit button can be available
         var textTranslate = component.get('v.textTranslate');
         var translateTo = component.get('v.translateTo');
         
@@ -20,6 +24,7 @@
     },
     
     processSubmit : function(component, event, helper) {
+        // process save to subsequently request translation using unbabel API
         component.set('v.showSpinner', true);
         
         var translationObj = {
@@ -33,6 +38,7 @@
     },
     
     nextPage : function(component, event, helper) {
+        // set next page and update records
         var nextPage = component.get('v.currentPage') + 1;
         var records = component.get('v.mapTranslations')[nextPage];
         
@@ -43,6 +49,7 @@
     },
     
     previousPage : function(component, event, helper) {
+        // set previous page and update records
         var previousPage = component.get('v.currentPage') - 1;
         var records = component.get('v.mapTranslations')[previousPage];
         

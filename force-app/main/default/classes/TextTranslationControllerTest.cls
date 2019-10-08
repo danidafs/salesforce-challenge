@@ -87,7 +87,7 @@ public class TextTranslationControllerTest {
     
     @isTest
     static void shouldRequestTranslationFail(){
-        // translating the word false, forces the request to fail due to logic in TextTranslationController.sendRequest
+        // translating the word false, forces the request to fail due to logic in TranslationRequestService.sendRequest
         Translation__c translationInsert = TranslationBuild.createTranslation('false', 'Portuguese');
         TextTranslationController.saveTranslation(translationInsert);
         

@@ -1,5 +1,6 @@
 ({
     loopRefresh : function(component, helper) {
+        // keeps refreshing table data to get most recent updates
         setTimeout($A.getCallback(function(){
             console.log('###### refresh ######');
             
@@ -10,6 +11,7 @@
     },
     
     fetchTranslations : function(component) {
+        // fetch all translations for pagination
         var action = component.get('c.getTranslations');
         
         action.setCallback(this, function(response){
@@ -18,7 +20,11 @@
                 component.set('v.allTranslations', translations);
                 component.set('v.dataSize', translations.length);
                 
+                // paginate after setting translations on component
                 this.paginate(component);
+                
+            } else {
+                this.showToast('Something went wrong, contact an administrator.', '10000', 'error');
             }
         });
         
@@ -26,6 +32,7 @@
     },
     
     paginate : function(component) {
+        // paginate translations set on component
         var translations = component.get('v.allTranslations');
         console.log('#### translations: ' + translations);
         
@@ -64,6 +71,7 @@
     },
     
     save : function(component, translationObj) {
+        // saves the translation record and requests translation
         console.log('#### save ####');
         var action = component.get('c.saveTranslation');
         
@@ -80,25 +88,18 @@
                 console.log('save: saveResponse[message]: ' + saveResponse['message']);
                 
                 if(saveResponse['success']){
+                    // request translation when record is saved with success
                     this.request(component, saveResponse['recordId']);
                     
                 } else {
+                    // shows error message when record is not saved
                     this.showToast(saveResponse['message'], '10000', 'error');
                     component.set('v.showSpinner', false);
                 }
 				
-            } else if (state === "INCOMPLETE") {
-                // do something
-            } else if (state === "ERROR") {
-                var errors = response.getError();
-                if (errors) {
-                    if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + 
-                                    errors[0].message);
-                    }
-                } else {
-                    console.log("Unknown error");
-                }
+            } else {
+                this.showToast('Something went wrong, contact an administrator.', '10000', 'error');
+                component.set('v.showSpinner', false);
             }
         });
 		
@@ -106,6 +107,7 @@
     },
     
     request : function(component, translationId) {
+        // send translation request using unbabel API
         console.log('#### request ####');
         var action = component.get('c.requestTranslation');
         
@@ -127,27 +129,20 @@
                 console.log('request: reqResponse[message]: ' + reqResponse['message']);
                 
                 if(reqResponse['success']){
+                    // refresh page when translation request is successfully sent
                     $A.get("e.force:refreshView").fire();
                     this.showToast('Translation successfully requested', '3000', 'success');
                     
                 } else {
+                    // shows error message when translation request fails
                     this.showToast(reqResponse['message'], '10000', 'error');
                 }
                 
                 component.set('v.showSpinner', false);
 				
-            } else if (state === "INCOMPLETE") {
-                // do something
-            } else if (state === "ERROR") {
-                var errors = response.getError();
-                if (errors) {
-                    if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + 
-                                    errors[0].message);
-                    }
-                } else {
-                    console.log("Unknown error");
-                }
+            } else {
+                this.showToast('Something went wrong, contact an administrator.', '10000', 'error');
+                component.set('v.showSpinner', false);
             }
         });
 		
