@@ -16,6 +16,7 @@ global class GenericTranslationHandler implements unbabelapi.ITranslationHandler
         try {
             Translation__c translation = TranslationDAO.fetchTranslationByExternalId( env.dataNoObj.get('Id') );
             
+            // set status to Translation__c record
             if(translation != null){
                 if(env.isSuccess){
                     translation.Status__c = 'Translated';

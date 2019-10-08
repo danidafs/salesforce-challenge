@@ -79,7 +79,7 @@
                 console.log('save: saveResponse[recordId]: ' + saveResponse['recordId']);
                 console.log('save: saveResponse[message]: ' + saveResponse['message']);
                 
-                if(saveResponse['success'] == 'true'){
+                if(saveResponse['success']){
                     this.request(component, saveResponse['recordId']);
                     
                 } else {
@@ -126,7 +126,7 @@
                 console.log('request: reqResponse[recordId]: ' + reqResponse['recordId']);
                 console.log('request: reqResponse[message]: ' + reqResponse['message']);
                 
-                if(reqResponse['success'] == 'true'){
+                if(reqResponse['success']){
                     $A.get("e.force:refreshView").fire();
                     this.showToast('Translation successfully requested', '3000', 'success');
                     
