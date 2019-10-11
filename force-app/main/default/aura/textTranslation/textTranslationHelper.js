@@ -22,9 +22,6 @@
                 
                 // paginate after setting translations on component
                 this.paginate(component);
-                
-            } else {
-                this.showToast('Something went wrong, contact an administrator.', '10000', 'error');
             }
         });
         

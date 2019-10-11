@@ -16,6 +16,9 @@ public with sharing class TextTranslationController {
         System.debug('#### saveTranslation: translation: ' + translation);
         
         try {
+            if(String.isNotEmpty(translation.Text__c) && translation.Text__c.length() > 255)
+                throw new GenericException('The text must be a maximum of 255 characters');
+            
             Database.insert(translation);
             
         } catch(Exception e){
@@ -62,5 +65,8 @@ public with sharing class TextTranslationController {
         
         return TextTranslationService.getResponse(true);
     }
+    
+    
+    public class GenericException extends Exception{}
     
 }

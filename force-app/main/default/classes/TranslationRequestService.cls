@@ -29,7 +29,7 @@ public class TranslationRequestService {
         System.debug('##### message: ' + message);
         System.debug('##### tr: ' + tr);
         
-        // Request Translation to Unbabel
+        // request Translation to Unbabel
         unbabelapi.UnbabelRestEnvelope ure;
         if(Test.isRunningTest()){
             // fake response if is running test
@@ -46,7 +46,7 @@ public class TranslationRequestService {
         System.debug('#### ure #### \n\n'+ure+'\n\n');
         
         
-        // Sets the TR fields
+        // sets the TR fields
         tr.unbabelapi__Unbabel_sObject_Id__c = message.Id;
         tr.unbabelapi__Unbabel_sObject__c = '';
         
@@ -57,7 +57,7 @@ public class TranslationRequestService {
             
             respMap = TextTranslationService.getResponse(true);
         
-        // If the request fails updates the Translation Request status to "Request Error" and inserts the TRs
+        // if the request fails updates the Translation Request status to "Request Error" and inserts the TRs
         } else {
             tr.unbabelapi__Unbabel_Status__c = 'Request Error';
             tr.unbabelapi__Unbabel_Error_Log__c = ure.message;
